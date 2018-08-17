@@ -1,0 +1,30 @@
+// AreadelCuadrado.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void main()
+{
+	float l, Area;
+	cout<<"Buenos días este programa sirve para calcular el área de un cuadrado";
+	cout<<"Por favor ingresa el lado: ";
+	cin>>l;
+	Area=l*l;
+	cout<<"El área del cuadrado es: "<<Area;
+	getch();
+}
+
+
+
+
+Algoritmo AreadelCuadrado
+	Escribir "Buenos d{ias, con este programa usted podrá hallar el área de un cuadrado"
+	Escribir "Por favor ingresa el lado: "
+	Leer l
+	Area<-l*l
+	Escribir "El área del cuadrado es: " Area
+FinAlgoritmo
