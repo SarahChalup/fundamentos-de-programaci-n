@@ -1,0 +1,10 @@
+Proceso AreadelTriangulo
+	Escribir "Este programa sirve para encontrar el área de un triángulo" 
+	Escribir "Por fabor ingresa la base: "
+	Leer b
+	Escribir "Por favor ingresa la altura: "
+	leer h
+	Area<-(b*h)/2
+	Escribir "El área del triángulo es: " Area
+	
+FinProceso
