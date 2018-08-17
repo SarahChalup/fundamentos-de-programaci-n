@@ -1,3 +1,29 @@
+// Area del triangulo.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+void main()
+{
+	float b, h, Area;
+	cout<<"Con este programa se podrá encontrar el área de un triángulo";
+	cout<<"Por favor ingresa la base: ";
+	cin>>b;
+	cout<<"Por favor ingresa la altura: ";
+	cin>>h;
+	Area=(b*h)/2;
+	cout<<"Sarah Chalup ";
+	cout<<Area;
+	getch();
+}
+
+
+
+
+
 Proceso AreadelTriangulo
 	Escribir "Este programa sirve para encontrar el área de un triángulo" 
 	Escribir "Por fabor ingresa la base: "
