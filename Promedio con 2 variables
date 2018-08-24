@@ -28,3 +28,23 @@ void main()
 	getch();
 }
 
+
+
+
+Proceso Promedio
+	p=0
+	leer a
+	p<-p+a
+	leer a
+	p<-p+a
+	leer a
+	p<-p+a
+	leer a
+	p<-p+a
+	leer a
+	p<-p+a
+	p<- p/5
+	escribir p
+	
+	
+FinProceso
