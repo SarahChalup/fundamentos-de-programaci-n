@@ -21,3 +21,21 @@ void main()
 
     getch();
 }
+
+
+
+
+Proceso Distancia2puntos
+	Escribir "Ingresa el primer punto"
+	leer x1
+	leer x2
+	Escribir "Ingresa el segundo punto"
+	leer x2
+	leer y2
+	A<- x2-x1
+	B<- y2-y1
+	distancia <- raiz( A^2 + B^2)
+	Escribir distancia
+	
+	
+FinProceso
