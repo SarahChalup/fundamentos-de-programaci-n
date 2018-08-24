@@ -18,3 +18,17 @@ void main()
 
     getch();
 }
+
+
+
+
+Proceso CambioVariable
+	leer a
+	leer b
+	aux<-a
+	a<-b
+	b<-aux
+	Escribir "El valor de a es:" a
+	Escribir "El valor de b es: " b
+	
+FinProceso
