@@ -17,3 +17,15 @@ void main()
 
     getch();
 }
+
+
+
+Proceso AreayPerimetro
+	escribir "Ingrese el radio"
+	leer r
+	Area<-r*r*3.1416
+	escribir "El area es: " area
+	perimetro <- 3.1416*r*2
+	Escribir "El perimetro es: " perimetro
+	
+FinProceso
