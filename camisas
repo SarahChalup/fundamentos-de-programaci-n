@@ -1,0 +1,24 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+void main ()
+{
+	int n;
+	float precio, totalPagar;
+	// Validar la entrada
+	do {
+		cout << "Ingrese el numero de camisas";
+		cin >> n;
+	} while  (n <= 0);  // !(n >=0)
+	do {
+		cout << "Ingrese el precio de la camisa";
+		cin >> precio;
+	} while ( precio < 0);
+	if (n>5)
+		cout << "El total a pagar es: " << precio*0.7;
+	else 
+		cout << "El total a pagar es: " << precio*0.8;
+	getch();
+}
