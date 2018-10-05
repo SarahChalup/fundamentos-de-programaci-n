@@ -1,0 +1,37 @@
+// Practico 2 - 7.cpp : Defines the entry point for the console application.
+//
+//Calcular el factorial de un número entero N. Donde se define como factorial de la siguiente forma:
+// FAC(N) = 1x2x3x.....xN; donde el factorial de cero es uno  (FAC(0) =1).  FAC(N)=N!, se lee factorial (!) de N.
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+using namespace std;
+float fac (float n);
+void main ()
+{
+	int n,resp;
+	cout << "Ingrese el numero maximo de la serie ";
+	cin >> n;
+	if (n>0)
+	{
+		resp= fac(n);
+		cout << "El resultado es: " << resp<<endl;
+	}else{
+		if (n==0)
+			cout << "la respueta es 1"<<endl;
+		else 
+			cout << "No existe factorial de un numero negativo"<<endl;
+	}
+		cout << "Autor Sarah Chalup";
+		getch ();
+	
+}
+float fac (float n)
+{
+	float p=1;
+	for (int i=1;i<=n;i++)
+		p=p*i;
+	return p;
+}
