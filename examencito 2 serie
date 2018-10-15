@@ -1,0 +1,29 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+using namespace std;
+
+float serie (float x, float n);
+void main()
+{
+	float x,n,Resp;
+	cout << "Ingrese la base: ";
+	cin >> x;
+	cout << "Ingrese el numero maximo de la serie";
+	cin >> n;
+	Resp= serie (x,n);
+	cout << Resp;
+	getch();
+}
+float serie (float x, float n)
+{
+	float s=5, fac=1;
+	for (int i=1; i<=n; i++)
+	{
+		fac=fac*i;
+		s=s+ (pow (x,i) / fac);
+	}
+	return s;
+}
+
