@@ -1,0 +1,87 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define max 100
+
+using namespace std;
+
+void cargar (int vec[], int tam);
+void ordenaras (int vec[], int tam);
+void ordenardes (int vec[], int tam);
+void mostrar (int vec[], int tam);
+
+void main ()
+{
+	int n, vec[max],p;
+	cout << "Ingrese el numero de elemnetos";
+	
+	do {
+	cin >> n;
+	} while (n>max || n<0);
+
+	do {
+	cout << "Presione 1 para cargar el vector"<< endl;
+	cout << "Presione 2 para ordenar el vector"<< endl;
+	cout << "Presione 3 para ordenar el vector"<< endl;
+	cout << "Presione 4 para mostrar el vector"<< endl;
+	cout << "Presione 0 para salir" << endl;
+	cin >> p;
+	switch (p)
+	{
+	case 1: cargar(vec,n); break;
+	case 2: ordenaras(vec,n); break;
+	case 3: ordenardes(vec,n);break;
+	case 4: mostrar(vec,n); break;
+	case 0: cout << "Gracias por usar este programa";
+	default: cout << "Opcion no valida";
+	}
+
+	} while (p!=0);
+	getch();
+}
+
+void cargar (int vec[], int tam)
+	{
+		for (int i=0; i<tam; i++)
+			cin >> vec[i];
+	}
+
+void ordenaras (int vec[], int tam)
+{	int aux;
+	for (int i=0; i<tam-1;i++)
+	{
+		for (int j=i+1; j>tam;j++)
+			{
+				if (vec[i]>vec[j])
+				{ 
+					aux=vec[i];
+					vec[i]=vec[j];
+					vec[j]=aux;
+				}
+			}
+	}
+}
+
+
+void ordenardes (int vec[], int tam)
+{	int aux;
+	for (int i=0; i<tam-1;i++)
+	{
+		for (int j=i+1; j>tam;j++)
+			{
+				if (vec[i]<vec[j])
+				{ 
+					aux=vec[i];
+					vec[i]=vec[j];
+					vec[j]=aux;
+				}
+			}
+	}
+}
+void mostrar (int vec[], int tam)
+{
+	for (int i=0; i<tam; i++)
+		cout << vec[i]<<endl;
+}
+
