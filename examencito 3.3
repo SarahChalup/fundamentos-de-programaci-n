@@ -1,44 +1,45 @@
+// examencito 2.cpp : Defines the entry point for the console application.
+//
 
 #include "stdafx.h"
 #include <iostream>
 #include "conio.h"
 
 using namespace std;
+#define max 100
 
-bool partidario (int arreglo[], int tam);
-void leer (int arreglo[], int tam);
+void leer(int vector[], int tam);
+bool partidario (int vector[], int tam);
 
 void main()
 {
+	int tam, vector[max];
 	bool r;
-	int tam, arreglo[100];
-	cout << "Ingrese el tamaño"<<endl;
-	cin >> tam;
-	cout << "ingrese el vector" << endl;
-	leer (arreglo,tam);
-	r=partidario (arreglo, tam);
+	cout << "Ingrese el tamaño del vector"<<endl;
+	cin>> tam;
+	cout << "Ingrese el vector"<<endl;
+	leer(vector,tam);
 	if (r==true)
-		cout << "el arreglo es partidario";
+		cout<<"Es partidario";
 	else
-		cout << "El arreglo no es partidario",
-
+		cout <<"no se partidario";
 	getch();
 }
 
-void leer (int arreglo[], int tam)
+void leer(int vector[], int tam)
 {
-	for (int i=0; i<tam; i++)
-		cin>> arreglo[i];
+	for(int i=0; i<tam; i++)
+		cin >> vector[i];
 }
-bool partidario (int arreglo[], int tam)
+
+bool partidario (int vector[], int tam)
 {
 	bool r=false;
-	for (int i=0; i<tam-1; i=+2)
+	for (int i=0; i<tam; i=+2)
 		for (int j=1; j<tam; j=+2)
-			{
-				if (arreglo[i]>arreglo[j])	
-			return true;
-			else 
-			return r;
-		}
+			if(vector[i]> vector[j])
+				return true;
+			
+	
+		return r;
 }
