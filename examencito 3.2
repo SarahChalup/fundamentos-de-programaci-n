@@ -1,3 +1,5 @@
+// examencito.cpp : Defines the entry point for the console application.
+//
 
 #include "stdafx.h"
 #include <iostream>
@@ -5,35 +7,35 @@
 #include "string"
 using namespace std;
 
-void contar(string frase);
-#define max 100
+void contar (string frase);
+
 void main()
 {
 	string frase;
-	cout<< "meta su frase"<<endl;
+	cout<< "Ingrese la frase:"<<endl;
 	getline(cin,frase);
-	contar(frase);
+	if (frase.length()<=100)
+		contar(frase);
+	else 
+	cout<<"El programa contiene mas de 100 caracteres";
 	getch();
 }
-
-void contar(string frase)
+void contar (string frase)
 {
+	int vocales=0, consonantes=0, espacios=0;
 	int tam=frase.length();
-	int vocal=0,consonante=0,espacio=0;
-	for (int i=0;i<tam; i++)
+	for (int i=0; i<tam; i++)
 		{if (frase[i]=='a' || frase[i]=='e' || frase[i]=='i' || frase[i]=='o' || frase[i]=='u' )
-			vocal++;
+			vocales++;
 		else {
-			if (frase[i]!=' ')
-				consonante++;
-			else 
-				espacio++;
-			}
+			if(frase[i]!=' ')
+				consonantes++;
+			else espacios++;
+		}
 	}
-cout << "la frase tiene "<< vocal << " vocales"<<endl;
-cout << "la frase tiene "<< consonante << " consonantes"<<endl;
-cout << "la frase tiene "<< espacio+1 << " palabras"<<endl;
-
+	cout << "Hay "<<espacios+1<< " palabras"<<endl;
+	cout << "Hay "<<vocales<<" vocales"<<endl;
+	cout << "Hay " <<consonantes<<" consonantes"<<endl;
 }
 
 
