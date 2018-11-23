@@ -98,16 +98,16 @@ int mayor(int MAT[MAX][MAX], int m, int n){
 				may=MAT[i][j];
 	return may;
 }
-void traspuesta (int MAT[MAX][MAX], int m, int n)
+void transpuesta (int MAT[MAX][MAX], int m, int n)
 {
 	int aux;
 	if( m==n)
-	for (int i=0;i<m;i++){
-		for (int j=0;j<n;j++)
-		{	aux=MAT[i][j];
-			MAT[i][j]=MAT[j][i];
-			MAT[j][i]=aux;}
-	n=n-1;
+	for (int i=0;i<n-1; i++)
+	  for (int j=1;j<m; j++){
+		  aux=MAT[i][j];
+		  MAT[i][j]=MAT[j][i];
+		  MAT[j][i]=aux;
+	  }
 	}
 	else cout << "La matriz no es cuadrada";
 }
