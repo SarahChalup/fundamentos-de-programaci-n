@@ -1,185 +1,438 @@
 #include "stdafx.h"
-
 #include <iostream>
-
 #include "conio.h"
-
 #include "string"
-
-
-
-using namespace std;
-
-
-
-void main(){
-
-
-	string nombre;
-
-	int opcion;
-
-	cout << "             BIENVENIDO A MEMOTEC         "<<endl<<endl;
-
-	cout << "Por favor, ingrese su nombre de usuario: ";
-
-	getline(cin,nombre);
-
-	cout << "Buenos dias Sr./Sra. "<<nombre<<"..."<<endl<<endl;
-
-	cout << "Si quiere agregar un nuevo evento, presione 1"<<endl;
-
-	cout << "Si quiere visualizar los eventos actuales, presione 2"<<endl;
-
-	cout << "Si quiere calcular los salarios para sus trabajadores, presione 3"<<endl;
-
-	cout << "Si quiere calcular los impuestos de la empresa, presione 4"<<endl<<endl;
-
-	cout << "Ingrese la opcion deseada..."<<endl<<endl;
-
-
-	do{
-
-	cin >> opcion;
-
-	
-
-	switch (opcion){
-
-		case 1: cout<< "0"; break; 
-
-		case 2: cout<< "0"; break; 
-
-		case 3: cout<< "0"; break; 
-
-		case 4: cout<< "0"; break; 
-
-			system("cls");
-
-	}
-
-
-	}while(opcion!=0);
-
-		getch();
-
-}
-
-
-
-// errores.cpp : Defines the entry point for the console application.
-//
-
-#include "stdafx.h"
-#include <iostream>
-#include "conio.h"
-#include "string.h"
-#include <time.h>
-#include "windows.h"
-using namespace std;
-void fechahora (int&Hour, int&Min, int&Sec);
-
-void main(){
-	int  hour1,min1,sec1, hour,min,sec;
-	bool k=true;
-	cout<<"ingrese la hora  ";
-	cin>>hour1;
-	cout<<"ingrese los minutos  ";
-	cin>>min1;
-	cin >>sec1;
-	while (k){
-	fechahora(hour,min,sec);
-	if(hour1==hour && min1==min && sec1==sec){
-		cout << "ALARMA";
-		k=false;}
-	else cout<<"..."<<endl;
-	Sleep(1000);
-	}
-	getch();
-}
-
-void fechahora (int &Hour, int &Min, int &Sec){
-	time_t current_time;
-	struct tm  local_time;
-
-	time ( &current_time );
-	localtime_s(&local_time, &current_time);
-
-	  int Year   = local_time.tm_year + 1900;
-	  int Month  = local_time.tm_mon + 1;
-	  int Day    = local_time.tm_mday;
-
-	  Hour   = local_time.tm_hour;
-	   Min    = local_time.tm_min;
-	   Sec    = local_time.tm_sec;
-
-	 // cout << Year << "/" << Month << "/" << Day << endl;
-	  //cout << Hour << ":" << Min << ":" << Sec;
-}
------------------------------------------------------------------------------------------------
-V0.02
------------------------------------------------------------------------------------------------
-#include "stdafx.h"
-#include <iostream>
-#include "conio.h"
-#include "string.h"
 #include <time.h>
 #include "windows.h"
 #include<stdlib.h>
 using namespace std;
-void fechahora (int&Hour, int&Min, int&Sec);
+void horaactual (int&Hora, int&Min, int&Sec);
+void fechaactual (int &Day, int &Month, int &Year);
 void propaganda (int n);
+bool validarfecha (int &dia, int &mes);
+bool comparardatos (string dato, string vector[], int tam, string vec2[], int&tam2);
+void tiemporestante (int hora1, int hora, int min1, int min, int sec1,int sec,int dia1, int dia, int mes1, int mes);
+bool premium (int n, bool p);
+float impuestosIVA(float monto);
+float impuestosIT(float monto, float &totalDF);
+void salarios(int numero, char nombre[20][60]);
+void calculo(float mat[20][20], int ntrab);
+
 void main(){
 	system ("color 8F" );
-	int  hour1,min1,sec1, hour,min,sec,n=0;
-	bool k=true;
-	cout<<"ingrese la hora  ";
-	cin>>hour1;
-	cout<<"ingrese los minutos  ";
-	cin>>min1;
-	cin >>sec1;
-	propaganda (n);
-	while (k){
-	fechahora(hour,min,sec);
-	if(hour1==hour && min1==min && sec1==sec){
-		cout << "ALARMA";
-		k=false;}
-	else cout<<"..."<<endl;
-	Sleep(1000);
+	string nombre,evento[100],tarea,s;
+	int opcion,opcion2,opcion3,cod,a=0,b=0,c=0, ntrab;
+	int dia1,mes1,año1,dia,mes,año;
+	int  hora1,min1,sec1, hora,min,sec,n=0;
+	float compra=0, venta=0, totalIVA, totalIT, totalDF=0, mat[20][20];
+	char op, op2, op3, opnom, nombress[20][60];
+	string TODO[100],DOING[100],DONE[100];
+	TODO[0]="TO DO"; a++;
+	DOING[0]="DOING"; b++;
+	DONE[0]= "DONE"; c++;
+	bool k=true,z,p=true;
+
+	cout << "\tBIENVENIDO A MEMOTEC         "<<endl<<endl;
+	cout << "Por favor, ingrese su nombre de usuario: ";
+	getline(cin,nombre);
+	
+	do{
+		if(p==true)
+			if(n%3==0)
+				propaganda(n);
+		cout << "MEMOTEC"<<endl<<endl;
+		cout << "Buenos dias Sr./Sra. "<<nombre<<"..."<<endl<<endl;
+		cout << "Presione 1 si quiere agregar una alarma "<<endl;
+		cout << "Presione 2 para utilizar el organizador MEMOTEC"<<endl;
+		cout << "Presione 3 si quiere calcular los salarios para sus trabajadores"<<endl;
+		cout << "Presione 4 si quiere calcular los impuestos de la empresa"<<endl;
+		cout << "Presione 5 Premium"<<endl;
+		cout << "Presione 0 para salir del programa"<<endl<<endl;
+		cout << "Ingrese la opcion deseada..."<<endl<<endl;
+	
+		cin >> opcion;	
+		switch (opcion){
+
+		case 1:  		 
+			system ("cls");
+			cout << "MEMOTEC"<<endl<<endl;
+			cout << "\tEsta es la funcion Alarma de MemoTec"<<endl<<endl;
+			cout << nombre << ", por favor ingrese la fecha de su evento: "<<endl;
+			cout << "Si es la fecha actual, presione 0, de lo contrario presione cualquier numero"<<endl;
+			cin >>opcion2;
+			if (opcion2==0)
+				fechaactual(dia1,mes1,año1);
+			else validarfecha (dia1,mes1);
+			fechaactual(dia,mes,año);
+			if (mes1>=mes)
+				año1=2018;
+			else
+				año1=2019;
+
+				cout<<"Por favor, ingrese solo la hora de su evento en formato 24 horas:  ";
+					cin>>hora1;
+					cout<<"Ingrese los minutos: ";
+					cin>>min1;
+					sec1=0;
+					
+					while (k==true){
+					horaactual(hora,min,sec);
+					fechaactual(dia,mes,año);
+					if(hora1==hora && min1==min && sec1==sec && dia1==dia && mes1==mes && año1==año){
+						cout << "* * * * ALARMA * * * *" << '\a';
+						k=false;}
+					else { tiemporestante (hora1,hora,min1,min,sec1,sec,dia1,dia,mes1,mes);
+
+						}
+					Sleep(1000);
+					}
+			getch();
+			system("cls");
+			break; 		
+
+		case 2: 
+			system("cls");
+			system("color 8B");
+			cout << "MEMOTEC"<<endl<<endl;
+			cout << "\tManual de usuario "<<endl<<endl;
+			cout << "En este organizador acomodaremos sus tareas en 3 categorias diferentes: "<<endl;
+			cout << "TO DO (Por Hacer): Tareas por hacer."<<endl;
+			cout << "DOING (Haciendo): Tareas en proceso. "<<endl;
+			cout << "DONE (Hechas): Tareas finalizadas. "<<endl;
+			cout << "De esta manera podra usted organizar sus objetivos diarios y asegurar la productividad."<<endl;
+			cout << "Presione cualquier tecla para continuar"<<endl;
+			getch();
+			do{
+				if(p==true)
+					if(n%3==0)
+						propaganda(n);
+				system ("color 8F");
+				system ("cls");
+				cout << "MEMOTEC"<<endl<<endl;
+				cout << "\tGracias por ingresar al organizador "<<nombre<<endl<<endl;	
+				cout << "Presione 1 si quiere agregar una tarea nueva a la lista"<<endl;
+				cout << "Presione 2 si decide empezar una tarea"<<endl;
+				cout << "Presione 3 si ha finalizado una tarea" << endl;
+				cout << "Presione 4 para visualizar la lista de tareas"<<endl;
+				cout << "Presione 0 para volver al menu principal" << endl<<endl;
+				cout << "Elija una opcion: ";
+				cin >> opcion3;
+				switch (opcion3){
+				case 1: cout << endl << "En esta opcion usted agregara una tarea a la lista de Tareas por Realizar, o To Do"<<endl;
+						cout << "Por favor, ingrese el nombre de la tarea: "<<endl;
+						cin.ignore();
+						getline(cin,TODO[a]);
+						a++;
+						Sleep(1000);
+						system("cls");
+						break; 	
+				case 2: cout << "Por favor, ingrese el nombre de la tarea que va a empezar: "<<endl;
+						cout << "Tome en cuenta que solo puede empezar tareas que ha anotado en la lista de To Do"<<endl<<endl;
+						for(int j=0;j<=a;j++)
+						cout<<TODO[j]<<endl;
+						cout << "Ingrese el nombre de la tarea que va a empezar"<<endl;
+						cin.ignore();
+						getline (cin,tarea);
+						z=comparardatos(tarea,TODO,a,DOING,b);
+						if (z==false)
+							cout << "OPCION INVALIDA"<<endl;
+						Sleep(1000);
+						system("cls");
+						break; 	
+				case 3: cout << "FELICIDADES, "<<nombre<<", ingresa el nombre de la tarea finalizada: "<<endl;
+						cout << "Tome en cuenta que solo puede terminar tareas que ya esten en proceso"<<endl<<endl;
+						for(int j=0;j<=b;j++)
+						cout<<DOING[j]<<endl;
+						cout << "Ingrese el nombre de la tarea finalizada"<<endl;
+						cin.ignore();
+						getline (cin,tarea);
+						z=comparardatos(tarea,DOING, b, DONE, c); 
+						if (z==false)
+							cout << "OPCION INVALIDA"<<endl;
+						Sleep(1000);
+						system("cls");
+						break; 	
+				case 4:						
+						for(int j=0;j<=a;j++)
+						cout<<TODO[j]<<endl;
+						for(int j=0;j<=b;j++)
+						cout<<DOING[j]<<endl;
+						for(int j=0;j<=c;j++)
+						cout<<DONE[j]<<endl;
+						getch();
+						system("cls");
+						break; 
+					
+				case 0: system ("cls");break;
+				default: cout << "Lo sentimos, esa opcion es invalida" << endl; break;
+
+			} 
+			n++;
+			}while (opcion3!=0);
+			break;
+
+		case 3: 
+			system ("cls");
+			cout << "MEMOTEC" << endl << endl;
+			cout<<"Bienvenido a la Funcion Salarios de MemoTec"<<endl;
+			cout<<"A continuacion, le daremos una informacion detallada sobre el salario de sus trabajadores"<<endl;
+			cout<<"Por el momento, solo podra ingresar un maximo de 20 trabajadores"<<endl;
+		do{
+			cout<<"Ingrese la cantidad de trabajadores (maximo 20): "<<endl;
+			do{
+			cin>>ntrab;
+			}while(ntrab<0 || ntrab>20);
+			salarios(ntrab, nombress);
+			calculo(mat, ntrab);
+			cout<<"  Nombre |"<<"Salario|"<<"AFP Lab.|"<<"AFP Pat.|"<<"Caja|   "<<"Indemn|  "<<" Ag. |"<<" Ag.EsfxBol|"<<"SueldoNeto"<<endl;
+				for (int k=0; k<ntrab; k++){
+			cout<<k+1<<". "<<nombress[k];
+			for (int l=0; l<8; l++)
+				cout<<"  "<<mat[k][l]<<"  ";
+			cout<<endl;
+			}
+			cout<<"Desea volver a utilizar la funcion? S/N"<<endl;
+			cin>>opnom;
+		}while(opnom=='S' || opnom=='s');
+			cout<<"Gracias por utilizar la Funcion Salarios, en unos segundos sera redirigido al menu principal"<<endl;			
+			system ("cls");
+			getch();	break; 
+
+		case 4: 
+			system ("cls");
+			cout << "MEMOTEC"<<endl<<endl;
+			cout << "Bienvenido a la Funcion Impuestos de MemoTec."<<endl;
+			do{
+			cout << "A continuacion, el programa calculara el credito fiscal acumulado."<<endl;
+			cout << "Desea omitir este paso? S/N"<<endl;
+			cin >> op2;
+			if (op2=='N' || op2=='n'){
+				totalIVA=impuestosIVA(compra);
+				cout<<"El Impuesto al Valor Agregado (IVA) que ha acumulado es de: "<<totalIVA<<" Bolivianos"<<endl;
+				}
+			else 
+			cout << "Omitio el calculo del IVA, se procedera a calcular el Impuesto a las Transacciones"<<endl;
+			cout << "Ahora, se calculara el Impuesto a las Transacciones"<<endl;
+			cout << "Adicionalmente, se calculara el Debito Fiscal acumulado"<<endl;
+			cout << "Desea omitir este paso? S/N"<<endl;
+			cin >> op3;
+			if (op3=='N' || op3=='n'){
+				cout<<"Si tiene mercaderia vendida, ingrese las ventas facturadas del mes. "<<endl;
+				totalIT=impuestosIT(venta, totalDF);
+				cout<<"El Debito Fiscal que ha acumulado es de: "<<totalDF<<" Bolivianos"<<endl;
+				cout<<"El Impueso a las Transacciones (IT) que debe pagar suma una cantidad de: "<<totalIT<<" Bolivianos"<<endl;	
+				}
+			if(totalIVA-totalDF>=0)
+			cout << "Su Credito Fiscal alcanza para cubrir su Debito Fiscal acumulado."<<endl;
+			else
+			cout << "El total del Debito Fiscal acumulado (descontando el Credito Fiscal es de: "<<totalDF-totalIVA<<" Bolivianos"<<endl;
+	
+			cout << "Desea calcular nuevamente sus impuestos? S/N"<<endl;
+			cin>>op;
+			}while(op=='S' || op=='s');
+			cout << "Gracias por usar la Funcion Impuestos, en unos segundos sera redirigido al menu principal"<<endl;
+			system ("cls");
+			getch(); break;
+
+		
+		case 5: 
+			system ("cls");
+			system("color 8B");
+			cout << "MEMOTEC"<<endl<<endl;
+			cout << "¿Desea disfrutar de la Agenda MemoTec sin publicidad? Por tan solo 10$ podra disfrutar de la aplicacion sin anuncios y a todo su potencial."<<endl;
+			cout << "Por favor contacte con un administrador para mas informacion"<<endl;
+			cout << "Ingrese el codigo que se le enviara al finalizar la transaccion"<<endl;
+			cin >> cod;
+			if (cod==666598 || cod==270001 || cod==250100)
+			{
+				cout << "Muchas gracias por su apoyo"<<endl;
+				cout << "Disfrute el programa"<<endl;
+				p=false;
+				Sleep(2000);
+			}
+			else cout << "Lo sentimos, el codigo es incorrecto"<<endl;
+			system ("cls");
+			system ("color 8F");
+			break;
+			
+		case 0: system ("cls");
+			cout << "MEMOTEC"<<endl<<endl;
+			cout << "Muchas gracias por utilizar nuestro programa Sr./Sra. " << nombre << endl << "Vuelva Pronto";
+			break;
+		
+		default: cout << "opcion invalida"<<endl;
+			system("cls");
 	}
-	getch();
+	n++;
+	}while(opcion!=0);
+		getch();
 }
 
-void fechahora (int &Hour, int &Min, int &Sec){
+
+
+void fechaactual (int &Day, int &Month, int &Year){
 	time_t current_time;
 	struct tm  local_time;
 
 	time ( &current_time );
 	localtime_s(&local_time, &current_time);
 
-	  int Year   = local_time.tm_year + 1900;
-	  int Month  = local_time.tm_mon + 1;
-	  int Day    = local_time.tm_mday;
+	   Year   = local_time.tm_year + 1900;
+	   Month  = local_time.tm_mon + 1;
+	   Day    = local_time.tm_mday;
+}
+void horaactual (int &Hora, int &Min, int &Sec){
+	time_t current_time;
+	struct tm  local_time;
 
-	  Hour   = local_time.tm_hour;
+	time ( &current_time );
+	localtime_s(&local_time, &current_time);
+	  Hora   = local_time.tm_hour;
 	   Min    = local_time.tm_min;
 	   Sec    = local_time.tm_sec;
 
 }
 void propaganda (int n){
 	system("cls");
-	cout << "COCACOLA SIENTE EL SABOR    ";
+	cout << "COCA-COLA SIENTE EL SABOR";
 	system ("color 1E" );
-	Sleep(5);
+	Sleep(50);
 	system ("color 2A" );
-	Sleep(5);
+	Sleep(50);
 	system ("color 3F" );
-	Sleep(5);
+	Sleep(50);
+	system ("color 5A" );
+	Sleep(50);
 	system ("color 4F" );
-	Sleep(5);
-	system ("color 5B" );
-	Sleep(300);
+	Sleep(2000);
 	system("cls");
 	system ("color 8F" );
 }
 
+bool validarfecha (int &dia, int &mes)
+{
+	int k=0,t=0,l=0,m=0;
+	cout << "Por favor, ingrese el mes: "<<endl;
+	do{
+		if(k!=0)
+			cout << "Lo sentimos, ese mes es invalido"<<endl;
+		cin >> mes;
+		k++;
+	}while (mes>12);
+	cout << "Por favor, ingrese el dia: "<< endl;
+	if(mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12)
+	do{
+		if(t!=0)
+			cout << "Lo sentimos, ese dia es invalido"<<endl;
+		cin >> dia;
+		t++;
+	}while (dia>31);
+	else 
+		if (mes==2)
+			do{
+				if(l!=0)
+			cout << "Lo sentimos, ese mes es invalido"<<endl;
+				cin >> dia;
+				l++;
+			}while(dia>28); 
+		else
+			do{
+				if(m!=0)
+			cout << "Lo sentimos, ese mes es invalido"<<endl;
+				cin >> dia;
+				m++;
+			}while (dia>30);
+	return true;
+}
+bool comparardatos (string dato, string vector[], int tam, string vec2[], int&tam2)
+{
+	bool k=false;
+	for(int j=0;j<=tam;j++)
+		if (vector[j].compare(dato)==false){
+			vec2[tam2]=vector[j];
+			for (int i=j;i<tam;i++)
+				vector[i]=vector[i+1];
+			tam2++;
+			k=true;}
+		
+		return k;
+}
+void tiemporestante (int hora1, int hora, int min1, int min, int sec1,int sec,int dia1, int dia, int mes1, int mes)
+{
+	cout << "Tiempo restante: ";
+	if (mes1!=mes)
+		cout << mes1-mes << " meses  ";
+	if (dia1!=dia)
+		cout << dia1-dia << "dias   ";
+	if (hora1!=hora)
+		cout << hora1-hora-1 << " horas  ";
+	if (min1!=min){
+		if (min1>min)
+		cout << min1-min-1 << " minutos   ";
+		else cout << 59-min << "minutos   ";}
+	if (sec1!=sec)
+		cout << 60-sec << "segundos   "<<endl;
+}
+
+float impuestosIVA(float monto){
+	float total=0, pf;
+	if (monto=!0){
+	cout<<"Cuando finalice, coloque 0 para obtener su Credito Fiscal acumulado"<<endl;
+	cout<<"Ingrese el monto total de cada factura:"<<endl;
+	do{
+		cin>>pf;
+		total=total+(pf*0.13);
+	}while(pf>0);
+	return total;
+}
+	else 
+		return 0;
+}
+float impuestosIT(float monto, float &totalDF){
+	float total=0, it;
+	cout<<"Cuando finalice, coloque 0 para proceder a calcular el IT y el Debito Fiscal"<<endl;
+	do{
+	cin>>it;
+	total=total+(it*0.03);
+	totalDF=totalDF+(it*0.13);
+	}while(it>0);
+	return total;
+}
+
+void salarios(int numero, char nombre[20][60]){
+	float salario, trabajador;
+	char op;
+	
+	do{
+	cout<<"Ingrese los nombres de sus trabajadores: "<<endl;
+	for (int i=0; i<numero; i++)
+		cin>>nombre[i];
+	cout<<"Los nombres registrados son:"<<endl;
+	for (int j=0; j<numero; j++)
+	cout<<j+1<<". "<<nombre[j]<<endl;
+	cout<<"Si no hay errores y desea continuar, coloque S: "<<endl;
+	cin>>op;
+	}while(op=!'s');
+}
+
+void calculo(float mat[20][20], int ntrab){
+	float sueldo, afpl=0.1271, afpp=0.0671, caja=0.1, indemn=0.0833, ag1=0.0833, agbol=0.0833;
+	cout<<"Ingrese el salario de cada uno de los trabajadores (mayor a 2060Bs): "<<endl;
+		for (int i=0;i<ntrab;i++){
+			do{
+			cin>>sueldo;
+			}while(sueldo<2060);
+		mat[i][0]=sueldo;
+		mat[i][1]=sueldo*afpl;
+		mat[i][2]=sueldo*afpp;
+		mat[i][3]=sueldo*caja;
+		mat[i][4]=sueldo*indemn;
+		mat[i][5]=sueldo*ag1;
+		mat[i][6]=sueldo*agbol;
+			if(sueldo>=2060 && sueldo<=8240)
+				mat[i][7]=sueldo*0.8729;
+			else if(sueldo>8240)
+				mat[i][7]=sueldo*0.7429;
+		}
+		
+}
